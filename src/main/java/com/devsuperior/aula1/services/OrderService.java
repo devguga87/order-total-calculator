@@ -10,10 +10,7 @@ public class OrderService {
     private ShippingService shippingService;
 
     public double total(Order order){
-            if(order.getDiscount() > 0.0){
-                return order.getBasic() - (order.getBasic() * order.getDiscount()/100) + shippingService.shipment(order);
-            } else {
-                return order.getBasic() + shippingService.shipment(order);
-            }
+            double discountedPrice = order.getBasic() * (1 - order.getDiscount()/100.0);
+            return discountedPrice + shippingService.shipment(order);
     }
 }
